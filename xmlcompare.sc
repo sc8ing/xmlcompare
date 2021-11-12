@@ -4,6 +4,8 @@ import $ivy.`software.purpledragon.xml:xml-compare_2.13:2.0.0`, software.purpled
 import scala.xml.XML
 import scala.xml.Elem
 import scala.xml.Node
+import software.purpledragon.xml.compare.options.DiffOptions
+import software.purpledragon.xml.compare.options.DiffOption
 
 @main
 def main(oldFile: String, newFile: String): Unit = {
@@ -12,7 +14,7 @@ def main(oldFile: String, newFile: String): Unit = {
   val oldXml = XML.loadFile(oldFile)
   val newXml = XML.loadFile(newFile)
 
-  val diff = XmlCompare.compare(transform(oldXml), transform(newXml))
+  val diff = XmlCompare.compare(oldXml, newXml, DiffOptions(DiffOption.IgnoreChildOrder))
   println(diff)
 }
 
